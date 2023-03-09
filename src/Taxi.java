@@ -7,15 +7,12 @@ public class Taxi extends Car{
         this.fareCollected = fareCollected;
     }
 
-    public void printTaxi(){
-        System.out.println("License Plate: " + getLicensePlate());
-        System.out.println("Toll Fee: "   + getTollFee());
-        System.out.println("Passengers: " + getPassengers());
-        System.out.println("Electric: " + isElectric());
-        System.out.println("Discount Applied: " + isDiscountApplied());
-        System.out.println("Fare Collected: " + fareCollected);
-    }
 
+    @Override
+    public void printInfo(){
+        super.printInfo();
+        System.out.println("Total Fare Collected: " + fareCollected);
+    }
     public void pickupRiders(int numRiders, double farePerRider){
         setPassengers(getPassengers()+numRiders);
         if(!isDiscountApplied()  && getPassengers()>= 4){
@@ -28,5 +25,14 @@ public class Taxi extends Car{
         return fareCollected;
     }
 
+    public boolean chargeAndDropOffRiders(double farePerRider){
+        int num = getPassengers()-1;
+        fareCollected += (num * farePerRider);
+        return(dropOffPassengers(num));
+    }
 
+    @Override
+    public void flash(){
+        System.out.println("The lights flashed in intervals");
+    }
 }
